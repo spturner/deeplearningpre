@@ -11,9 +11,9 @@
 
 ## Instructions <a name="instructions"></a>
 This document describes the setup for the Deep Learning workshop. There are several tasks for you to complete in preparation:
-1. Install MXNet / Gluon locally on your own laptop
+** 1. Install MXNet / Gluon locally on your own laptop
 2. Set up the EC2 Deep Learning environment on a CPU instance type (c4.4xlarge)
-3. Set up the EC2 Deep Learning environment on a GPU instance type (p2.xlarge)
+3. Set up the EC2 Deep Learning environment on a GPU instance type (p2.xlarge) **
 
 
 ## How to install MXNet / Gluon on your own machine (macOS) <a name="macos"></a>
