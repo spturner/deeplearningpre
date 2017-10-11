@@ -6,7 +6,7 @@
 2.	[How to install mxnet/gluon on your own machine](#macos)
 	* [macOS](#macos)
 	* [Linux](#linux)
-	* [Windows](#windows)
+	* [Windows](#windows) - coming soon
 3.  [Validate the local installation](#localvalidate)
 4.	[Set up the EC2 environments](#ec2env)
 5.  [Validate the remote installation](#remotevalidate)
@@ -105,7 +105,7 @@ git clone https://github.com/zackchase/mxnet-the-straight-dope.git
 
 [Now validate the local installation](#localvalidate)
 
-## How to install MXNet / Gluon on your own machine (Linux)
+## How to install MXNet / Gluon on your own machine (Linux) <a name="linux"></a>
 
 **Step 1:** Install virtualenv for linux
 
