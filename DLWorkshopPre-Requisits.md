@@ -1,20 +1,26 @@
-# Preparation for Deep Learning bootcamp - Sardina 16th October 2017
+# Preparation for Deep Learning bootcamp
 
 
 ## Contents
 1.  [Instructions](#instructions)
 2.	[How to install mxnet/gluon on your own machine](#macos)
+	* [macOS](#macos)
+	* [Linux](#linux)
+	* [Windows](#windows)
 3.  [Validate the local installation](#localvalidate)
 4.	[Set up the EC2 environments](#ec2env)
 5.  [Validate the remote installation](#remotevalidate)
 
 
 ## Instructions <a name="instructions"></a>
-This document describes the setup for the Deep Learning workshop. There are several tasks for you to complete in preparation:  
+This document describes the setup for the Deep Learning workshop. There are several tasks for you to complete in preparation:    
+**0. Check/increase EC2 instance limits**   
 **1. Install MXNet / Gluon locally on your own laptop**  
 **2. Set up the EC2 Deep Learning environment on a CPU instance type (c4.4xlarge)**  
 **3. Set up the EC2 Deep Learning environment on a GPU instance type (p2.xlarge)**
 
+## Check/increase EC2 instance limits
+Ensure you have the ability to spin up the particular instance types. For the purpose of this workshop, you will require 1x CPU instance type and 1x GPU instance type. To check your EC2 limits, go to the EC2 console and click the 'Limits' link on the left hand side. You will then see a list of your on-demand EC2 instance limits. Scroll down the list until you find the p2.xlarge instance type and ensure the value is at least one (1) or greater. 
 
 ## How to install MXNet / Gluon on your own machine (macOS) <a name="macos"></a>
 
@@ -23,17 +29,20 @@ Firstly, we need to create a virtual environment with Python 3 installed so we c
 **Step 1:** Install Homebrew and Python Development Tools
 ```
 # Install Homebrew
-$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-$ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+# Opt out of Homebrew analytics
+brew analytics off
 
 # Install python development tools - python3, pip3, python-setuptools
-$ brew install python3
+brew install python3
 ```
 
 **Step 2:** Install virtualenv for macOS
 
 ```
-$ pip3 install virtualenv
+pip3 install virtualenv
 ```
 
 ***Note:*** If you receive an error saying 'pip3: command not found' try typing `pi` at the command prompt then hitting `Tab` twice to see if it is listed as another version such as `pip2`, `pip2.7` or `pip`
@@ -43,16 +52,16 @@ $ pip3 install virtualenv
 The below will create what is called a 'virtual environment' in the `~/mxnet` directory. You are free to choose whatever directory you wish to run the virtual environment in. 
 
 ```
-$ virtualenv --system-site-packages ~/mxnet
+virtualenv --system-site-packages ~/mxnet
 ```
 
 Activate the virtualenv environment you just created for the workshop.
 
 ```
-$ source ~/mxnet/bin/activate
+source ~/mxnet/bin/activate
 ```
 
-After activating the environment you should see the prompt change to be the virtualenv prompt as shown below. The following commands are all to be entered in the virtual environment so please ensure you are working in your virtual environment before continuing. 
+After activating the environment, you should see the prompt change to be the virtualenv prompt as shown below. The following commands are all to be entered in the virtual environment so please ensure you are working in your virtual environment before continuing. 
 
 ```
 (mxnet)$
@@ -73,7 +82,7 @@ For the Deep Learning workshop we will be using Python 3
 pip3 install python3
 ```
 
-**Step 5:** Install MXNet with CPU support
+**Step 5:** Install MXNet with Gluon support
 ```
 pip3 install mxnet --pre
 ```
@@ -94,8 +103,65 @@ git clone https://github.com/zackchase/mxnet-the-straight-dope.git
  cd ~/mxnet-the-straight-dope/
 ```
 
-## How to install MXNet / Gluon on your own machine (Windows)
-... to be added
+[Now validate the local installation](#localvalidate)
+
+## How to install MXNet / Gluon on your own machine (Linux)
+
+**Step 1:** Install virtualenv for linux
+
+```
+sudo apt-get update
+sudo apt-get install -y python3-dev python-virtualenv
+```
+
+**Step 2:** Create and activate the virtual environment for the labs
+
+The below will create what is called a 'virtual environment' in the `~/mxnet` directory. You are free to choose whatever directory you wish to run the virtual environment in. 
+
+```
+virtualenv --system-site-packages ~/mxnet
+```
+
+Activate the virtualenv environment you just created for the workshop.
+
+```
+source ~/mxnet/bin/activate
+```
+
+After activating the environment, you should see the prompt change to be the virtualenv prompt as shown below. The following commands are all to be entered in the virtual environment so please ensure you are working in your virtual environment before continuing. 
+
+```
+(mxnet)$
+```
+
+**Step 3:** Install libatlas-base-dev dependency for MXNet
+```
+#Fix to install libatlas-base-dev as per this issue: https://github.com/apache/incubator-mxnet/issues/5290 
+sudo apt-get install libatlas-base-dev
+```
+
+**Step 4:** Install MXNet with Gluon support
+```
+pip3 install mxnet --pre
+```
+
+**Step 5:** Install additional tools: GraphViz & Jupyter Notebooks
+
+* Graphviz (required for graph visualisation using mxnet.viz package [Link])
+* Jupyter Notebook (required for interactive notebook environment [Link])
+
+```
+pip3 install graphviz
+pip3 install jupyter
+```
+
+**Step 6:** Clone the Gluon tutorials into a local directory and then change to this directory
+```
+git clone https://github.com/zackchase/mxnet-the-straight-dope.git
+cd ~/mxnet-the-straight-dope/
+```
+
+[Now validate the local installation](#localvalidate)
 
 
 ## Validate the local installation <a name="localvalidate"></a>
@@ -167,7 +233,7 @@ For the Deep Learning environment we are going to be using a CPU-based host (c4.
 
 **Step 2:** Setting up the instance
 
-During the workshop, you will be securely accessing the Jupyter notebook server on your host and will therefore need to map port `8888` (default Jupyter notebook port) to your local machine in order to connect via the browser. This is accomplised via the `ssh -L` command.
+During the workshop, you will be securely accessing the Jupyter notebook server on your host and will therefore need to map port `8888` (default Jupyter notebook port) to your local machine in order to connect via the browser. This is accomplished via the `ssh -L` command.
 
 1. Identify the instance and the public DNS / IP address associated with it.
 
